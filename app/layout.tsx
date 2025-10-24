@@ -44,7 +44,7 @@ export default function RootLayout({
         <ThemeProvider>
           <CartProvider>
             <Navbar />
-            <main className="min-h-screen pt-16">
+            <main className="min-h-screen pt-16 bg-[var(--color-bg)]">
               <PageTransition>{children}</PageTransition>
             </main>
           </CartProvider>

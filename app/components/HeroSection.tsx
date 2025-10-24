@@ -9,10 +9,28 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Abstract Background using tokens */}
-      <div className="absolute inset-0">
-        <div className="absolute -top-24 -right-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle at 30% 30%, var(--color-primary), transparent 60%)' }} />
-        <div className="absolute -bottom-24 -left-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(circle at 70% 70%, var(--color-secondary), transparent 60%)' }} />
-      </div>
+        <div className="absolute inset-0">
+            <motion.div
+                initial={{ opacity: 0, x: 90 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.6 }}
+                className="absolute -top-24 -right-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-10"
+                style={{
+                background:
+                    "radial-gradient(circle at 30% 30%, var(--color-primary), transparent 60%)",
+                }}
+            />
+            <motion.div
+                initial={{ opacity: 0, x: -90 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.9, delay: 0.6 }}
+                className="absolute bottom-14 -left-24 w-[40rem] h-[40rem] rounded-full blur-3xl opacity-10"
+                style={{
+                background:
+                    "radial-gradient(circle at 70% 70%, var(--color-secondary), transparent 60%)",
+                }}
+            />
+        </div>
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
@@ -23,8 +41,7 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-8"
         >
-          <div className="inline-flex items-center space-x-2 bg-[color:var(--color-surface)]/80 backdrop-blur-sm border border-[color:var(--color-border)]/60 rounded-full px-4 py-2 text-sm text-[color:var(--color-text-muted)]">
-            <Icon icon="material-symbols:new-releases-outline" className="text-[color:var(--color-primary)]" />
+          <div className="inline-flex items-center space-x-2 backdrop-blur-sm border border-[color:var(--color-border)]/60 px-4 py-2 text-sm text-[color:var(--color-text-muted)]">
             <span>New Collection Just Arrived</span>
             <Icon icon="material-symbols:arrow-right-alt" className="text-[color:var(--color-text-muted)]" />
           </div>
