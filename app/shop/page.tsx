@@ -2,8 +2,8 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ProductCard from '@/app/components/ProductCard';
-import Footer from '@/app/components/Footer';
+import ProductCard from '@/components/ProductCard';
+import Footer from '@/components/Footer';
 import { mockProducts } from '@/app/utils/mockData';
 import { Icon } from '@iconify/react';
 

@@ -81,7 +81,7 @@ export default function ProductCard({
           }`}
           onLoad={() => setImageLoaded(true)}
           loading="lazy"
-        />
+        />  
 
         {/* Loading placeholder */}
         {!imageLoaded && (
@@ -98,13 +98,13 @@ export default function ProductCard({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-3 right-3 w-8 h-8 bg-[color:var(--color-surface)]/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all"
+          className="absolute top-3 right-3 w-8 h-8 bg-[color:var(--color-surface)]/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all cursor-pointer"
         >
           <Icon
             icon={
               isWishlisted
                 ? "material-symbols:favorite"
-                : "material-symbols:favorite-border"
+                : "material-symbols:favorite-outline"
             }
             className={`text-sm transition-colors ${
               isWishlisted
@@ -126,7 +126,8 @@ export default function ProductCard({
           <button
             onClick={handleQuickPurchase}
             disabled={loading}
-            className="w-full bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] text-xs py-2 px-3 rounded-lg hover:bg-[color:var(--color-primary-dark)] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] cursor-pointer
+              text-xs py-2 px-3 rounded-lg hover:bg-[color:var(--color-primary-dark)] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Processing..." : "Quick Buy"}
           </button>
@@ -178,7 +179,7 @@ export default function ProductCard({
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-2 bg-[color:var(--color-elevated)] hover:bg-[color:var(--color-primary)] hover:text-[color:var(--color-primary-contrast)] rounded-lg transition-all"
+            className="p-2 bg-[color:var(--color-elevated)] hover:bg-[color:var(--color-primary)] hover:text-[color:var(--color-primary-contrast)] rounded-lg transition-all cursor-pointer"
             title="Add to Cart"
           >
             <Icon

@@ -5,4 +5,4 @@ const handler = createCosmicPaymentsHandler({
   getServerSession
 });
 
-export const POST = handler;
+export const POST = handler; 

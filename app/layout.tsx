@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import "./theme.css";
-import Navbar from "@/app/components/Navbar";
+import Navbar from "@/components/Navbar";
 import { CartProvider } from "@/app/contexts/CartContext";
 import { ThemeProvider } from "@/app/contexts/ThemeContext";
-import PageTransition from "@/app/components/PageTransition";
+import PageTransition from "@/components/PageTransition";
+import { SessionProvider } from "next-auth/react";
 
 const primaryFont = Geist({
   weight: ["400", "600", "700"],
@@ -24,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={primaryFont.className}>
-      <body className="antialiased bg-[color:var(--color-bg)] text-[color:var(--color-text)]">
+      <body className="antialiased  text-[color:var(--color-text)]">
         {/* Early theme application to avoid flash */}
         <script
           dangerouslySetInnerHTML={{
@@ -42,12 +43,14 @@ export default function RootLayout({
           }}
         />
         <ThemeProvider>
+        <SessionProvider>
           <CartProvider>
             <Navbar />
             <main className="min-h-screen pt-16 bg-[var(--color-bg)]">
               <PageTransition>{children}</PageTransition>
             </main>
           </CartProvider>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>

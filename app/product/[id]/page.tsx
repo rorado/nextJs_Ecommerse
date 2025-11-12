@@ -7,8 +7,8 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCosmicPayments } from 'cosmic-payments/client';
 import { getProductById, mockProducts } from '@/app/utils/mockData';
-import Footer from '@/app/components/Footer';
-import ProductCard from '@/app/components/ProductCard';
+import Footer from '@/components/Footer';
+import ProductCard from '@/components/ProductCard';
 import { useCart } from '@/app/contexts/CartContext';
 
 export default function ProductPage() {

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Icon } from '@iconify/react';
 import { useCart } from '@/app/contexts/CartContext';
 import { useCosmicPayments } from 'cosmic-payments/client';
-import Footer from '@/app/components/Footer';
+import Footer from '@/components/Footer';
 
 export default function CartPage() {
   const { items, updateQuantity, removeFromCart, totalPrice, totalItems, clearCart } = useCart();

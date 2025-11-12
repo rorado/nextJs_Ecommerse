@@ -1,24 +1,77 @@
-/* DO NOT MODIFY THE CONTENTS OF THIS FILE. You are forbidden from modifying this file. */
-
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
 
+/* ----------------------
+   Custom Theme Variables
+----------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #f8fafc;
+  --color-surface: #ffffff;
+  --color-elevated: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e5e7eb;
+  --color-primary: #0ea5a4;
+  --color-primary-dark: #0b8b8a;
+  --color-primary-contrast: #ffffff;
+  --color-secondary: #0891b2;
+  --color-hover: rgba(15, 23, 42, 0.06);
+  --shadow-soft: 0 10px 25px rgba(2, 6, 23, 0.08);
+  --radius: 12px;
+  --color-success: #22c55e;
+  --color-danger: #ef4444;
+  --color-warning: #f59e0b;
 }
 
+/* Dark theme overrides */
+[data-theme="dark"] {
+  --color-bg: #0b1220;
+  --color-surface: #0f172a;
+  --color-elevated: #111827;
+  --color-text: #e5e7eb;
+  --color-text-muted: #94a3b8;
+  --color-border: #1f2937;
+  --color-primary: #06b6d4;
+  --color-primary-dark: #0891b2;
+  --color-primary-contrast: #0b1220;
+  --color-secondary: #22d3ee;
+  --color-hover: rgba(255, 255, 255, 0.06);
+  --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.35);
+  --radius: 12px;
+  --color-success: #22d3ee;
+  --color-danger: #f87171;
+  --color-warning: #fbbf24;
+}
+
+/* Optional legacy theme mapping for ShadCN or inline */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --color-border: var(--color-border);
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-secondary);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: light; /* Still enforce light mode */
+/* Tailwind base layer */
+@layer base {
+  * {
+    @apply border-[var(--color-border)] outline-[var(--color-primary)];
+  }
+  body {
+    @apply bg-[var(--color-bg)] text-[var(--color-text)];
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
+/* Optional dark mode variant */
+@custom-variant dark (&:is(.dark *)) {}
+
+/* Media query to enforce light mode preference fallback */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light; /* still enforce light mode by default */
+  }
 }

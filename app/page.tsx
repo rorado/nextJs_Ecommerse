@@ -3,9 +3,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import HeroSection from '@/app/components/HeroSection';
-import ProductCard from '@/app/components/ProductCard';
-import Footer from '@/app/components/Footer';
+import HeroSection from '@/components/HeroSection';
+import ProductCard from '@/components/ProductCard';
+import Footer from '@/components/Footer';
 import { getFeaturedProducts } from '@/app/utils/mockData';
 import { Icon } from '@iconify/react';
 
@@ -137,7 +137,7 @@ export default function HomePage() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 text-[color:var(--color-text)] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary-contrast)]/20"
+                className="flex-1 px-4 py-3 text-[color:var(--color-text)] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary-contrast)]/20 border-2 border-[color:var(--color-primary-contrast)]"
               />
               <motion.button
                 whileHover={{ scale: 1.02 }}

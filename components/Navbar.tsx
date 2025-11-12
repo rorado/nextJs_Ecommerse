@@ -5,14 +5,24 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Icon } from "@iconify/react";
 import { useCart } from "@/app/contexts/CartContext";
-import ThemeToggle from "@/app/components/ThemeToggle";
+import ThemeToggle from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 interface NavbarProps {
   className?: string;
 }
 
 export default function Navbar({ className = "" }: NavbarProps) {
+  const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalItems } = useCart();
   const pathname = usePathname();
@@ -62,13 +72,41 @@ export default function Navbar({ className = "" }: NavbarProps) {
               >
                 {item.name}
               </Link>
-            ))}
+            ))} 
           </div>
 
           {/* Right Actions */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <ThemeToggle />
+           
+            {status === "loading" ? (
+              <div className="h-8 w-8 rounded-full bg-gray-200 animate-pulse"></div>
+            ) : status === "authenticated" ? (
+              <DropdownMenu modal={false}>
+                <DropdownMenuTrigger asChild>
+                  <span className="cursor-pointer">{session?.user?.name}</span>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56" align="start">
+                  <DropdownMenuItem>My Account</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
+            ) : (
+              <Link href="/login">
+                <button className="px-2 py-1 border-[var(--color-primary)] border-2 rounded-lg text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-hover)] transition-colors cursor-pointer">
+                  LOGIN
+                </button>
+              </Link>
+            )}
+
+
+            
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
+            
             {/* Cart */}
             <Link
               href="/cart"

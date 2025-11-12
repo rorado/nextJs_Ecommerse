@@ -3,7 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import Footer from '@/app/components/Footer';
+import Footer from '@/components/Footer';
 
 export default function AboutPage() {
   const teamMembers = [
