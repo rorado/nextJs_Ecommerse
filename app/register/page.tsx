@@ -23,6 +23,8 @@ import Link from "next/link";
 import { userRegister } from "@/server/actions/userRegister";
 import { RegisterSchema } from "@/lib/validation/authSchema";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
+import SocialProviders from "@/components/SocialProviders";
+
 
 export const title = "Register Card";
 
@@ -55,7 +57,7 @@ const RegisterCard = () => {
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
-      <Card className="w-full max-w-md bg-[var(--color-bg)] border-none shadow-md">
+      <Card className="w-full max-w-md bg-background border-none shadow-md">
         <CardHeader>
           <CardTitle>Create an account</CardTitle>
           <CardDescription>
@@ -117,10 +119,8 @@ const RegisterCard = () => {
         </div>
 
           <Button className="w-full cursor-pointer" onClick={handleSubmit}>Create Account</Button>
-          <Button className="w-full cursor-pointer" variant="outline">
-            Sign up with Google
-          </Button>
-        </CardContent>
+           <SocialProviders/>
+            </CardContent>
 
         <CardFooter className="flex justify-center">
           <p className="text-muted-foreground text-sm">

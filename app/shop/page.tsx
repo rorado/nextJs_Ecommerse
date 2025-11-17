@@ -217,14 +217,14 @@ export default function ShopPage() {
             >
               <Icon icon="material-symbols:search-off" className="text-6xl text-[color:var(--color-border)] mb-4 mx-auto" />
               <h3 className="text-xl font-medium text-[color:var(--color-text)] mb-2">No products found</h3>
-              <p className="text-[color:var(--color-text-muted)] mb-4">Try adjusting your search or filter criteria</p>
+              <p className="text-(--color-text-muted) mb-4">Try adjusting your search or filter criteria</p>
               <button
                 onClick={() => {
                   setSearchQuery('');
                   setSelectedCategory('All');
                   setSortBy('name');
                 }}
-                className="bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] px-6 py-2 rounded-lg text-sm font-medium hover:bg-[color:var(--color-primary-dark)] transition-colors"
+                className="bg-primary text-[color:var(--color-primary-contrast)] px-6 py-2 rounded-lg text-sm font-medium hover:bg-[color:var(--color-primary-dark)] transition-colors"
               >
                 Clear Filters
               </button>

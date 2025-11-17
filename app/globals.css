@@ -59,10 +59,10 @@
 /* Tailwind base layer */
 @layer base {
   * {
-    @apply border-[var(--color-border)] outline-[var(--color-primary)];
+    @apply border-border outline-primary;
   }
   body {
-    @apply bg-[var(--color-bg)] text-[var(--color-text)];
+    @apply bg-background text-foreground;
   }
 }
 

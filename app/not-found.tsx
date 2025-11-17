@@ -6,10 +6,10 @@ import Link from "next/link";
 
 export default function TextPressureDemo() {
   return (
-    <div className="h-[calc(100vh-12rem)] relative flex flex-col items-center justify-center w-full bg-[var(--color-bg)] text-[var(--color-text)]">
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-primary)]/10 via-transparent to-[var(--color-secondary)]/10 blur-3xl" />
+    <div className="h-[calc(100vh-12rem)] relative flex flex-col items-center justify-center w-full bg-background text-foreground">
+      <div className="absolute inset-0 bg-linear-to-br from-primary/10 via-transparent to-(--color-secondary)/10 blur-3xl" />
       <motion.div
-        className="absolute w-72 bg-[var(--color-primary)]/20 rounded-full blur-3xl"
+        className="absolute w-72 bg-primary/20 rounded-full blur-3xl"
         animate={{
           x: [0, 50, -50, 0],
           y: [0, -30, 30, 0],
@@ -40,7 +40,7 @@ export default function TextPressureDemo() {
           minFontSize={80}
           className="text-[10vw] font-extrabold drop-shadow-[0_0_20px_rgba(14,165,164,0.4)]"
         />
-        <p className="mt-2 text-lg sm:text-xl text-[color:var(--color-text-muted)]">
+        <p className="mt-2 text-lg sm:text-xl text-(--color-text-muted)">
           Oops! The page you’re looking for doesn’t exist.
         </p>
 
@@ -52,7 +52,7 @@ export default function TextPressureDemo() {
         >
           <Link
             href="/"
-            className="px-6 py-3 rounded-lg bg-[var(--color-primary)] text-[var(--color-primary-contrast)] font-semibold shadow-[0_4px_20px_rgba(14,165,164,0.3)] hover:bg-[var(--color-primary-dark)] transition-all"
+            className="px-6 py-3 rounded-lg bg-primary text-(--color-primary-contrast) font-semibold shadow-[0_4px_20px_rgba(14,165,164,0.3)] hover:bg-(--color-primary-dark) transition-all"
           >
             Go Home
           </Link>

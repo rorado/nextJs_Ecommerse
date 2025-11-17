@@ -7,35 +7,35 @@ import { Icon } from '@iconify/react';
 
 export default function PaymentCancel() {
   return (
-    <div className="min-h-screen bg-[color:var(--color-elevated)] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-(--color-elevated) flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-[color:var(--color-surface)]/90 backdrop-blur-lg rounded-2xl shadow-xl p-8 max-w-md w-full text-center border border-[color:var(--color-border)]"
+        className="bg-(--color-surface)/90 backdrop-blur-lg rounded-2xl shadow-xl p-8 max-w-md w-full text-center border border-border"
       >
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="w-16 h-16 bg-[color:var(--color-elevated)] rounded-full flex items-center justify-center mx-auto mb-6"
+          className="w-16 h-16 bg-(--color-elevated) rounded-full flex items-center justify-center mx-auto mb-6"
         >
-          <Icon icon="material-symbols:cancel" className="text-[color:var(--color-danger)] text-3xl" />
+          <Icon icon="material-symbols:cancel" className="text-(--color-danger) text-3xl" />
         </motion.div>
         
-        <h1 className="text-2xl font-medium text-[color:var(--color-text)] mb-4">Payment Cancelled</h1>
-        <p className="text-[color:var(--color-text-muted)] mb-6 text-sm">Your payment was cancelled. You can try again or continue browsing our products.</p>
+        <h1 className="text-2xl font-medium text-foreground mb-4">Payment Cancelled</h1>
+        <p className="text-(--color-text-muted) mb-6 text-sm">Your payment was cancelled. You can try again or continue browsing our products.</p>
         
         <div className="space-y-3">
           <Link
             href="/shop"
-            className="block w-full bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] py-3 px-6 rounded-lg font-medium hover:bg-[color:var(--color-primary-dark)] transition-colors"
+            className="block w-full bg-primary text-(--color-primary-contrast) py-3 px-6 rounded-lg font-medium hover:bg-(--color-primary-dark) transition-colors"
           >
             Continue Shopping
           </Link>
           <Link
             href="/"
-            className="block w-full border border-[color:var(--color-border)] text-[color:var(--color-text)] py-3 px-6 rounded-lg font-medium hover:bg-[color:var(--color-elevated)] transition-colors"
+            className="block w-full border border-border text-foreground py-3 px-6 rounded-lg font-medium hover:bg-(--color-elevated) transition-colors"
           >
             Back to Home
           </Link>

@@ -9,7 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react"; 
+import SocialProviders from "@/components/SocialProviders";
 
 const LoginCard = () => {
   const [email, setEmail] = useState("");
@@ -30,6 +31,11 @@ const LoginCard = () => {
       redirect: false,
     });
 
+    if (res?.error) {
+    setError("Invalid email or password");
+  } else {
+    router.push("/profile");
+  }
     setIsLoading(false);
 
     if (res?.error) setError("Invalid email or password");
@@ -43,7 +49,7 @@ const LoginCard = () => {
 
   return (
     <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
-      <Card className="w-full max-w-md bg-[var(--color-bg)] border-none">
+      <Card className="w-full max-w-md bg-background border-none">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>Enter your email below to login</CardDescription>
@@ -92,10 +98,7 @@ const LoginCard = () => {
           </Button>
 
           {/* Google Login Button with loading */}
-          <Button className="w-full" variant="outline" disabled={isLoading}>
-            {/* {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />} */}
-            Login with Google
-          </Button>
+         <SocialProviders/>
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-muted-foreground text-sm">

@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 
 interface NavbarProps {
   className?: string;
@@ -32,6 +33,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
     { name: "Shop", href: "/shop" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
+    { name: "Profile", href: "/profile" },
   ];
 
   return (
@@ -39,7 +41,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 bg-[color:var(--color-surface)]/80 backdrop-blur-lg border-b border-[color:var(--color-border)]/60 ${className}`}
+      className={`fixed top-0 left-0 right-0 z-50 bg-(--color-surface)/80 backdrop-blur-lg border-b border-border/60 ${className}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -47,61 +49,81 @@ export default function Navbar({ className = "" }: NavbarProps) {
           <Link href="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="w-8 h-8 bg-gradient-to-br from-[color:var(--color-primary)] to-[color:var(--color-primary-dark)] rounded-lg flex items-center justify-center shadow-sm"
+              className="w-8 h-8 bg-linear-to-br from-primary to-(--color-primary-dark) rounded-lg flex items-center justify-center shadow-sm"
             >
-              <span className="text-[color:var(--color-primary-contrast)] font-medium text-sm">
+              <span className="text-(--color-primary-contrast) font-medium text-sm">
                 E
               </span>
             </motion.div>
-            <span className="font-medium text-[color:var(--color-text)]">
+            <span className="font-medium text-foreground">
               EliteShop
             </span>
           </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            {menuItems.map((item) => (
+            {menuItems.map((item) => {
+            // Only render the Profile link if session.user exists
+            if (item.href === "/profile" && !session?.user) return null;
+
+            return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`text-sm transition-colors font-medium ${
-                  pathname == item.href
-                    ? "text-[color:var(--color-primary-dark)]"
-                    : "text-[color:var(--color-text-muted)]"
-                } hover:text-[color:var(--color-text)]`}
+                className="text-sm transition-colors font-medium hover:text-foreground"
+                style={{
+                  color:
+                    pathname === item.href
+                      ? "var(--color-primary-dark)"
+                      : "var(--color-text-muted)",
+                }}
               >
                 {item.name}
               </Link>
-            ))} 
+            );
+          })}
           </div>
 
           {/* Right Actions */}
           <div className="flex items-center space-x-2 sm:space-x-4">
            
             {status === "loading" ? (
-              <div className="h-8 w-8 rounded-full bg-gray-200 animate-pulse"></div>
+              <div className="h-5 w-14 rounded bg-gray-200 animate-pulse opacity-5"/>
             ) : status === "authenticated" ? (
-              <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild>
-                  <span className="cursor-pointer">{session?.user?.name}</span>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="start">
-                  <DropdownMenuItem>My Account</DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
+              <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <DropdownMenu modal={false}>
+                    <DropdownMenuTrigger asChild>
+                      <img
+                        src={session.user.image || "/default-avatar.png"}
+                        alt={session.user.name || "Profile"}
+                        className="w-10 h-10 rounded-full shadow-md object-cover cursor-pointer"
+                      />
+                    </DropdownMenuTrigger>
+
+                    <DropdownMenuContent className="w-56 bg-background" align="start">
+                      <DropdownMenuItem>
+                        <Link href="/profile">My Account</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </TooltipTrigger>
+                <TooltipContent side="top" align="center">
+                  {session.user.name}
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
 
             ) : (
               <Link href="/login">
-                <button className="px-2 py-1 border-[var(--color-primary)] border-2 rounded-lg text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-hover)] transition-colors cursor-pointer">
+                <button className="px-2 py-1 border-primary border-2 rounded-lg text-(--color-text-muted) hover:text-foreground hover:bg-(--color-hover) transition-colors cursor-pointer">
                   LOGIN
                 </button>
               </Link>
             )}
-
-
             
             <div className="hidden md:block">
               <ThemeToggle />
@@ -110,14 +132,14 @@ export default function Navbar({ className = "" }: NavbarProps) {
             {/* Cart */}
             <Link
               href="/cart"
-              className="relative p-2 rounded-lg text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-hover)] transition-colors"
+              className="relative p-2 rounded-lg text-(--color-text-muted) hover:text-foreground hover:bg-(--color-hover) transition-colors"
             >
               <Icon
                 icon="material-symbols:shopping-cart-outline"
                 className="text-lg"
               />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 bg-primary text-(--color-primary-contrast) text-xs rounded-full w-5 h-5 flex items-center justify-center">
                   {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}
@@ -126,7 +148,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 rounded-lg text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] hover:bg-[color:var(--color-hover)] transition-colors cursor-pointer"
+              className="md:hidden p-2 rounded-lg text-(--color-text-muted) hover:text-foreground hover:bg-(--color-hover) transition-colors cursor-pointer"
             >
               <Icon
                 icon={
@@ -149,7 +171,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[color:var(--color-surface)]/95 backdrop-blur-lg border-t border-[color:var(--color-border)]/60"
+            className="md:hidden bg-(--color-surface)/95 backdrop-blur-lg border-t border-border/60"
           >
             <div className="px-4 py-4 space-y-4">
               {menuItems.map((item) => (
@@ -157,12 +179,12 @@ export default function Navbar({ className = "" }: NavbarProps) {
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="block text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)] transition-colors font-medium py-2"
+                  className="block text-sm text-(--color-text-muted) hover:text-foreground transition-colors font-medium py-2"
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="pt-4 border-t border-[color:var(--color-border)]/60">
+              <div className="pt-4 border-t border-border/60">
                 <ThemeToggle />
               </div>
             </div>

@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={primaryFont.className}>
-      <body className="antialiased  text-[color:var(--color-text)]">
+      <body className="antialiased  text-foreground">
         {/* Early theme application to avoid flash */}
         <script
           dangerouslySetInnerHTML={{
@@ -46,7 +46,7 @@ export default function RootLayout({
         <SessionProvider>
           <CartProvider>
             <Navbar />
-            <main className="min-h-screen pt-16 bg-[var(--color-bg)]">
+            <main className="min-h-screen pt-16 bg-background">
               <PageTransition>{children}</PageTransition>
             </main>
           </CartProvider>
