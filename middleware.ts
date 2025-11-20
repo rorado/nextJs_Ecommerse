@@ -2,7 +2,7 @@ import { auth } from "@/server/auth";
 import { NextResponse } from "next/server";
 
 const protectedRoutes = ["/profile"];
-const authRoutes = ["/login", "/register", "forgot-password", "reset-password"];
+const authRoutes = ["/login", "/register"];
 
 export default auth((req) => {
   const { nextUrl } = req;
