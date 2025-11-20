@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { User } from "@/lib/generated/prisma";
 
 interface ProfileCardProps {
@@ -25,38 +24,47 @@ export default function ProfileCard({ user }: ProfileCardProps) {
     name: user.name || "",
     email: user.email || "",
     image: user.image || "",
-    
-    password: "",
-    confirmPassword: "",
   });
-  const [isVisible, setIsVisible] = useState(false);
-  const [isVisible1, setIsVisible1] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async () => {
-    if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
+    setLoading(true);
     try {
       const res = await fetch("/api/user", {
-        method: "PUT",
+        method: "PATCH", // Make sure your API route uses PATCH
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: user.id, ...formData }),
       });
-      if (!res.ok) throw new Error("Failed to update profile");
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(errorText || "Failed to update profile");
+      }
+
+      const updatedUser = await res.json();
+
+      // Update local form state with new user data
+      setFormData({
+        name: updatedUser.name || "",
+        email: updatedUser.email || "",
+        image: updatedUser.image || "",
+      });
+
       setIsEditing(false);
-    } catch (err) {
+    } catch (err: any) {
+      alert("Error updating profile: " + err.message);
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen from-blue-50 to-indigo-50 p-6">
+    <div className="flex items-center justify-center min-h-screen p-6">
       <Card className="w-full max-w-md bg-background shadow-md">
         <CardHeader>
           <CardTitle>{isEditing ? "Edit Profile" : "Profile"}</CardTitle>
@@ -100,6 +108,7 @@ export default function ProfileCard({ user }: ProfileCardProps) {
                   placeholder="John Doe"
                 />
               </div>
+
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
@@ -111,16 +120,7 @@ export default function ProfileCard({ user }: ProfileCardProps) {
                   placeholder="email@example.com"
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="image">Avatar URL</Label>
-                <Input
-                  id="image"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
-                  placeholder="https://..."
-                />
-              </div>
+
               <div className="space-y-2">
                 <Label htmlFor="image">Avatar URL</Label>
                 <Input
@@ -132,8 +132,12 @@ export default function ProfileCard({ user }: ProfileCardProps) {
                 />
               </div>
 
-              <Button className="w-full mt-4" onClick={handleSubmit}>
-                Save
+              <Button
+                className="w-full mt-4"
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                {loading ? "Saving..." : "Save"}
               </Button>
               <Button
                 variant="ghost"
@@ -147,15 +151,15 @@ export default function ProfileCard({ user }: ProfileCardProps) {
         </CardContent>
 
         {!isEditing && (
-      <CardFooter className="flex flex-col gap-1 text-sm text-muted-foreground">
-        <span>Member since: {new Date(user.createdAt).toLocaleDateString()}</span>
-        {user.role === "USER" ? (
-          <span>Role: Normal User</span>
-        ) : (
-          <span>Role: Admin</span>
+          <CardFooter className="flex flex-col gap-1 text-sm text-muted-foreground">
+            <span>Member since: {new Date(user.createdAt).toLocaleDateString()}</span>
+            {user.role === "USER" ? (
+              <span>Role: Normal User</span>
+            ) : (
+              <span>Role: Admin</span>
+            )}
+          </CardFooter>
         )}
-      </CardFooter>
-    )}
       </Card>
     </div>
   );

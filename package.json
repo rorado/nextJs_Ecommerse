@@ -29,6 +29,7 @@
     "lucide-react": "^0.553.0",
     "next": "15.3.0",
     "next-auth": "^5.0.0-beta.30",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^3.4.1",

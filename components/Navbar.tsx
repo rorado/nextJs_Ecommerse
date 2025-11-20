@@ -33,7 +33,6 @@ export default function Navbar({ className = "" }: NavbarProps) {
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Profile", href: "/profile" },
-    { name: "Dashboard", href: "/dashboard" },
   ];
 
   return (
