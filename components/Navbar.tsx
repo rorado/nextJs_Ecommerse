@@ -8,7 +8,6 @@ import { useCart } from "@/app/contexts/CartContext";
 import ThemeToggle from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,6 +33,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
     { name: "Profile", href: "/profile" },
+    { name: "Dashboard", href: "/dashboard" },
   ];
 
   return (
@@ -70,7 +70,7 @@ export default function Navbar({ className = "" }: NavbarProps) {
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-sm transition-colors font-medium hover:text-foreground"
+                className="text-sm transition-colors font-medium hover:text-foreground hover:underline"
                 style={{
                   color:
                     pathname === item.href
