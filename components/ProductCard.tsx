@@ -69,10 +69,10 @@ export default function ProductCard({
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -8 }}
       transition={{ duration: 0.3 }}
-      className={`group relative bg-[color:var(--color-surface)]/80 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${className}`}
+      className={`group relative bg-(--color-surface)/80 backdrop-blur-sm rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden ${className}`}
     >
       {/* Image Container */}
-      <div className="relative aspect-square overflow-hidden rounded-t-2xl bg-[color:var(--color-elevated)]">
+      <div className="relative aspect-square overflow-hidden rounded-t-2xl bg-(--color-elevated)">
         <motion.img
           src={image}
           alt={name}
@@ -85,10 +85,10 @@ export default function ProductCard({
 
         {/* Loading placeholder */}
         {!imageLoaded && (
-          <div className="absolute inset-0 bg-[color:var(--color-elevated)] animate-pulse flex items-center justify-center">
+          <div className="absolute inset-0 bg-(--color-elevated) animate-pulse flex items-center justify-center">
             <Icon
               icon="material-symbols:image-outline"
-              className="text-[color:var(--color-text-muted)] text-2xl"
+              className="text-(--color-text-muted) text-2xl"
             />
           </div>
         )}
@@ -98,7 +98,7 @@ export default function ProductCard({
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setIsWishlisted(!isWishlisted)}
-          className="absolute top-3 right-3 w-8 h-8 bg-[color:var(--color-surface)]/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all cursor-pointer"
+          className="absolute top-3 right-3 w-8 h-8 bg-(--color-surface)/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-all cursor-pointer"
         >
           <Icon
             icon={
@@ -108,8 +108,8 @@ export default function ProductCard({
             }
             className={`text-sm transition-colors ${
               isWishlisted
-                ? "text-[color:var(--color-danger)]"
-                : "text-[color:var(--color-text-muted)]"
+                ? "text-(--color-danger)"
+                : "text-(--color-text-muted)"
             }`}
           />
         </motion.button>
@@ -126,8 +126,8 @@ export default function ProductCard({
           <button
             onClick={handleQuickPurchase}
             disabled={loading}
-            className="w-full bg-[color:var(--color-primary)] text-[color:var(--color-primary-contrast)] cursor-pointer
-              text-xs py-2 px-3 rounded-lg hover:bg-[color:var(--color-primary-dark)] transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-primary text-(--color-primary-contrast) cursor-pointer
+              text-xs py-2 px-3 rounded-lg hover:bg-(--color-primary-dark) transition-colors font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Processing..." : "Quick Buy"}
           </button>
@@ -137,13 +137,13 @@ export default function ProductCard({
       {/* Product Info */}
       <div className="p-4">
         <Link href={`/product/${id}`}>
-          <h3 className="font-medium text-[color:var(--color-text)] text-sm mb-1 line-clamp-1 hover:text-[color:var(--color-text)]/90 transition-colors">
+          <h3 className="font-medium text-foreground text-sm mb-1 line-clamp-1 hover:text-(--color-text)/90 transition-colors">
             {name}
           </h3>
         </Link>
 
         {description && (
-          <p className="text-xs text-[color:var(--color-text-muted)] mb-3 line-clamp-2">
+          <p className="text-xs text-(--color-text-muted) mb-3 line-clamp-2">
             {description}
           </p>
         )}
@@ -158,13 +158,13 @@ export default function ProductCard({
                 className={`text-xs ${
                   i < rating
                     ? "text-yellow-400"
-                    : "text-[color:var(--color-border)]"
+                    : "text-border"
                 }`}
               />
             ))}
           </div>
           {ratingCount > 0 && (
-            <span className="text-xs text-[color:var(--color-text-muted)]">
+            <span className="text-xs text-(--color-text-muted)">
               ({ratingCount})
             </span>
           )}
@@ -172,14 +172,14 @@ export default function ProductCard({
 
         {/* Price & Add to Cart */}
         <div className="flex items-center justify-between">
-          <span className="font-medium text-[color:var(--color-text)]">
+          <span className="font-medium text-foreground">
             ${price.toFixed(2)}
           </span>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleAddToCart}
-            className="p-2 bg-[color:var(--color-elevated)] hover:bg-[color:var(--color-primary)] hover:text-[color:var(--color-primary-contrast)] rounded-lg transition-all cursor-pointer"
+            className="p-2 bg-(--color-elevated) hover:bg-primary hover:text-(--color-primary-contrast) rounded-lg transition-all cursor-pointer"
             title="Add to Cart"
           >
             <Icon

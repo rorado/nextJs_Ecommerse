@@ -18,7 +18,7 @@ export default function HomePage() {
       <HeroSection />
 
       {/* Features Section */}
-      <section className="py-16 bg-[color:var(--color-surface)]">
+      <section className="py-16 bg-(--color-surface)">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -27,8 +27,8 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-light text-[color:var(--color-text)] mb-4">Why Choose EliteShop?</h2>
-            <p className="text-[color:var(--color-text-muted)] max-w-2xl mx-auto">
+            <h2 className="text-3xl font-light text-foreground mb-4">Why Choose EliteShop?</h2>
+            <p className="text-(--color-text-muted) max-w-2xl mx-auto">
               We&apos;re committed to providing exceptional quality and service in everything we do.
             </p>
           </motion.div>
@@ -59,11 +59,11 @@ export default function HomePage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center p-6"
               >
-                <div className="w-12 h-12 bg-[color:var(--color-elevated)] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Icon icon={feature.icon} className="text-[color:var(--color-primary)] text-xl" />
+                <div className="w-12 h-12 bg-(--color-elevated) rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Icon icon={feature.icon} className="text-primary text-xl" />
                 </div>
-                <h3 className="font-medium text-[color:var(--color-text)] mb-2">{feature.title}</h3>
-                <p className="text-sm text-[color:var(--color-text-muted)]">{feature.description}</p>
+                <h3 className="font-medium text-foreground mb-2">{feature.title}</h3>
+                <p className="text-sm text-(--color-text-muted)">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -71,7 +71,7 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products Section */}
-      <section className="py-16 bg-[color:var(--color-elevated)]">
+      <section className="py-16 bg-(--color-elevated)">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -81,12 +81,12 @@ export default function HomePage() {
             className="flex items-center justify-between mb-12"
           >
             <div>
-              <h2 className="text-3xl font-light text-[color:var(--color-text)] mb-4">Featured Products</h2>
-              <p className="text-[color:var(--color-text-muted)]">Discover our handpicked selection of premium items</p>
+              <h2 className="text-3xl font-light text-foreground mb-4">Featured Products</h2>
+              <p className="text-(--color-text-muted)">Discover our handpicked selection of premium items</p>
             </div>
             <Link
               href="/shop"
-              className="hidden sm:flex items-center space-x-2 text-[color:var(--color-primary)] hover:text-[color:var(--color-primary-dark)] font-medium text-sm transition-colors"
+              className="hidden sm:flex items-center space-x-2 text-primary hover:text-(--color-primary-dark) font-medium text-sm transition-colors"
             >
               <span>View All</span>
               <Icon icon="material-symbols:arrow-right-alt" />
@@ -110,7 +110,7 @@ export default function HomePage() {
           <div className="text-center sm:hidden">
             <Link
               href="/shop"
-              className="inline-flex items-center space-x-2 text-[color:var(--color-primary)] hover:text-[color:var(--color-primary-dark)] font-medium text-sm transition-colors"
+              className="inline-flex items-center space-x-2 text-primary hover:text-(--color-primary-dark) font-medium text-sm transition-colors"
             >
               <span>View All Products</span>
               <Icon icon="material-symbols:arrow-right-alt" />
@@ -120,7 +120,7 @@ export default function HomePage() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 bg-gradient-to-r from-[color:var(--color-primary)] to-[color:var(--color-primary-dark)]">
+      <section className="py-16 bg-linear-to-r from-primary to-(--color-primary-dark)">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -128,8 +128,8 @@ export default function HomePage() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-light text-[color:var(--color-primary-contrast)] mb-4">Stay in the Loop</h2>
-            <p className="text-[color:var(--color-primary-contrast)]/80 mb-8 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-light text-(--color-primary-contrast) mb-4">Stay in the Loop</h2>
+            <p className="text-(--color-primary-contrast)/80 mb-8 max-w-2xl mx-auto">
               Be the first to know about new arrivals, exclusive offers, and styling tips.
             </p>
 
@@ -137,12 +137,12 @@ export default function HomePage() {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 text-[color:var(--color-text)] rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[color:var(--color-primary-contrast)]/20 border-2 border-[color:var(--color-primary-contrast)]"
+                className="flex-1 px-4 py-3 text-foreground rounded-l-lg focus:outline-none focus:ring-2 focus:ring-(--color-primary-contrast)/20 border-2 border-(--color-primary-contrast)"
               />
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-[color:var(--color-primary-contrast)] text-[color:var(--color-primary)] px-6 py-3 rounded-r-lg font-medium hover:opacity-90 transition-colors"
+                className="bg-(--color-primary-contrast) text-primary px-6 py-3 rounded-r-lg font-medium hover:opacity-90 transition-colors"
               >
                 Subscribe
               </motion.button>
@@ -152,7 +152,7 @@ export default function HomePage() {
       </section>
 
       {/* Categories Section */}
-      <section className="py-16 bg-[color:var(--color-surface)]">
+      <section className="py-16 bg-(--color-surface)">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -161,8 +161,8 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl font-light text-[color:var(--color-text)] mb-4">Shop by Category</h2>
-            <p className="text-[color:var(--color-text-muted)]">Find exactly what you&apos;re looking for</p>
+            <h2 className="text-3xl font-light text-foreground mb-4">Shop by Category</h2>
+            <p className="text-(--color-text-muted)">Find exactly what you&apos;re looking for</p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -180,7 +180,7 @@ export default function HomePage() {
                 whileHover={{ y: -8 }}
                 className="relative group cursor-pointer"
               >
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-[color:var(--color-elevated)]">
+                <div className="aspect-4/3 rounded-2xl overflow-hidden bg-(--color-elevated)">
                   <img
                     src={category.image}
                     alt={category.name}
